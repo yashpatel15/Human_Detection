@@ -1,7 +1,7 @@
 # HUMAN DETECTION ON CUSTOM DATASET.
 
 
--------------------------------------------------------RUN INFERENCE WITH THIS REPOSITORY-------------------------------------------------------
+----------------------------------------------RUN INFERENCE WITH THIS REPOSITORY----------------------------------------------
 
 Copy this Github Repository
 
