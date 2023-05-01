@@ -1,0 +1,69 @@
+
+------------------------------------------------------TRAIN THE YOLOv7 MODEL ON THE CUSTOM DATASET------------------------------------------------------
+
+Git clone this repository : https://github.com/WongKinYiu/yolov7.git on your local machine
+
+Edit requirements.txt file and remove 11th and 12th line from it and save it.
+
+Run this following commands on the terminal:
+
+touch requirements_cpu.txt
+touch requirements_gpu.txt
+	
+Now put the following code in the requirements_cpu.txt (make sure their is no space in the starting of every line):
+
+# FOR Torch CPU
+
+-i https://download.pytorch.org/whl/cpu
+
+torch==1.11.0+cpu
+torchvision==0.12.0+cpu
+	
+And put the following code in requirements_gpu.txt (make sure their is no space in the starting of every line):
+
+# For GPU
+
+-i https://download.pytorch.org/whl/cu113
+
+torch==1.11.0+cu113 
+torchvision==0.12.0+cu113 
+
+After making the .txt files make conda environment in your local machine, activate it and then run the following code in the terminal :
+
+pip install -r requirements.txt
+pip install -r requirements_cpu.txt
+pip install -r requirements_gpu.txt
+
+Now go to the following path cfg/training/ and copy yolov7.yaml file and paste it in the same folder and rename it as yolov7_custom.yaml after that open it and make nc: 1 (1 is just for 1 class you can edit based on your preference of classes) and then save it.
+
+Now go to the data folder and make some following changes inside the folder(make sure the names of the folders are as it is):
+	1. Make two folder name train and val.
+	2. Inside the train folder make two sub-folder images and labels.
+	3. Inside the val folder make two sub-folder images and labels.
+	4. Copy the coco.yaml file and paste it in the same directory and rename it as coco_custom.yaml and put the following text inside it.
+		train: ./data/train
+		val: ./data/val
+
+		# number of classes
+		nc: 1 # You can change the classes based on your preference)
+
+		# class names
+		names: ['person'] # Edit the names of the classes also based on your preference like ['person', 'car', ....]
+
+Make sure the labels folder have the annotated data in the yolo accepted format : <object-class> <x> <y> <width> <height> e.g. 0 0.76484375 0.43046875 0.0609375 0.1734375
+
+After Doing all the above steps you are ready to train your model on the custom dataset.
+
+To train the model run the following code in the terminal (Make sure you are still have activated the conda environment):
+
+python3 train.py --workers 4 --device 0 --batch-size 8 --epochs 100 --img 640 640 --data data/coco_custom.yaml --hyp data/hyp.scratch.custom.yaml --cfg cfg/training/yolov7_custom.yaml --name yolov7-custom --weights yolov7.pt
+
+After Training is completed you need to go the following directory to get the trained weights file : ./runs/train/weights/ now their is best.pt file generated copy the location of the best.pt
+
+Now for running the inference on the image or detecting the objects in the image run the following code:
+
+python3 detect.py --weights ./runs/train/weights/best.pt --conf 0.5 --img-size 640 --source image.jpg --no-trace
+
+Results will be stored on the following location : ./runs/detect/exp/image.jpg
+
+
