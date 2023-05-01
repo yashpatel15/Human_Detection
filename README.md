@@ -3,7 +3,7 @@
 
 -------------------------------------------------------RUN INFERENCE WITH THIS REPOSITORY-------------------------------------------------------
 
-Copy this Github Repository
+Git Clone this Repository
 
 In the data folder make two folders : train and val
 Inside the train folder make two sub-folders images and labels
