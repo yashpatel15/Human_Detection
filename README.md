@@ -25,7 +25,7 @@ python3 train.py
 
 it will automatically create this folders and subfolders : Detection/Train/.......many more files
 now their will be weights folder and inside it their is best.pt file will be formed you can use that weights file for the detection on your images.
-i have used the dataset which I mentioned above so if you want to use the weights file for that dataset download it from this link :
+i have used the dataset which I mentioned above so if you want to use the weights file for that dataset download it from this link : https://drive.google.com/drive/folders/1R8D_NFBBpfmq6FYdei66CUNpd6o7iKbd?usp=sharing
 
 Now make folder in this form Detection/Train/weights/ in the main directory to sub directories and then inside this folder add the downloaded weight file.
 
